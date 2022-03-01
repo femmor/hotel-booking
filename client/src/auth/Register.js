@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import RegisterForm from "../components/RegisterForm";
 
 const Register = () => {
@@ -16,10 +17,18 @@ const Register = () => {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    console.log(credentials);
+    try {
+      const res = await axios.post(
+        "http://localhost:3005/api/register",
+        credentials
+      );
+      console.log("Register user", res);
+    } catch (error) {
+      console.log(error.message);
+    }
 
     clearForm();
   };
