@@ -3,11 +3,7 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
   const { user } = useSelector(state => ({ ...state }));
-  return (
-    <div className="container-fluid p-5 h1 text-center">
-      Homepage {JSON.stringify(user)}
-    </div>
-  );
+  return <div className="container-fluid p-5 h1 text-center">Homepage</div>;
 };
 
 export default Home;
