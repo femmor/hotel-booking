@@ -1,10 +1,10 @@
 import express from "express";
-import router from "./routes/auth.js";
+import { readdirSync } from "fs";
 
 const app = express();
 
 // route middleware
-app.use("/api", router);
+readdirSync("./routes").map(r => app.use("/api", require(`./routes/${r}`)));
 
 const port = 3005 || process.env.PORT;
 
