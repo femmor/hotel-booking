@@ -1,10 +1,10 @@
 import express from "express";
+import router from "./routes/auth.js";
 
 const app = express();
 
-app.get("/api/:message", (req, res) => {
-  res.status(200).send(req.params.message);
-});
+// route middleware
+app.use("/api", router);
 
 const port = 3005 || process.env.PORT;
 
