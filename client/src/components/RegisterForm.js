@@ -1,5 +1,5 @@
 const RegisterForm = ({ handleSubmit, credentials, handleChange }) => {
-  const { name, email, password, password2 } = credentials;
+  const { name, email, password } = credentials;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -33,17 +33,6 @@ const RegisterForm = ({ handleSubmit, credentials, handleChange }) => {
           placeholder="Enter password"
           name="password"
           value={password}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group mb-3">
-        <label htmlFor="name">Confirm Password</label>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Confirm password"
-          name="password2"
-          value={password2}
           onChange={handleChange}
         />
       </div>
