@@ -36,7 +36,11 @@ const RegisterForm = ({ handleSubmit, credentials, handleChange }) => {
           onChange={handleChange}
         />
       </div>
-      <button className="btn btn-primary w-100 mb-3" type="submit">
+      <button
+        className="btn btn-primary w-100 mb-3"
+        type="submit"
+        disabled={!name || !email || !password}
+      >
         Submit
       </button>
     </form>

@@ -35,3 +35,30 @@ export const registerUser = async (req, res) => {
     return res.status(400).send("Error creating user, please try again");
   }
 };
+
+export const loginUser = (req, res) => {
+  const { email, password } = req.body;
+  User.findOne({ email })
+    .then(user => {
+      if (!user)
+        return res.status(400).send("User with the email does not exist");
+      // check if password is correct
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) return res.status(400).send("Error logging in");
+        if (!isMatch) return res.status(400).send("Incorrect password");
+
+        // if user is found and password is correct
+        // create a token with JWT
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+        // return the token to the user
+        return res.json({
+          ok: true,
+          token,
+        });
+      });
+    })
+    .catch(err => {
+      console.log("Login user error: ", err);
+      return res.status(400).send("Error logging in");
+    });
+};
