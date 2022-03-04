@@ -21,10 +21,10 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3005/api/register",
+        `${process.env.REACT_APP_API}/register`,
         credentials
       );
-      console.log("Register user", res);
+      console.log("Register user", res); // res.data
     } catch (error) {
       console.log(error.message);
     }
