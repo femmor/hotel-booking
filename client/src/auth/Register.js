@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import RegisterForm from "../components/RegisterForm";
+import { register } from "../actions/auth";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
@@ -20,10 +21,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API}/register`,
-        credentials
-      );
+      const res = await register(credentials);
       console.log("Register user", res); // res.data
     } catch (error) {
       console.log(error.message);
