@@ -7,7 +7,6 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    password2: "",
   });
 
   const handleChange = e => {
@@ -38,7 +37,6 @@ const Register = () => {
       name: "",
       email: "",
       password: "",
-      password2: "",
     });
   };
 
