@@ -19,12 +19,18 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
+    console.log("send login data", credentials);
     try {
       const res = await login(credentials);
-      console.log("Login user", res); // res.data
+      if (res.data) {
+        console.log("Save user data in redux and local storage and redirect");
+        console.log(res.data);
+      }
     } catch (error) {
-      console.log(error.message);
-      toast.error(error.message);
+      console.log(error);
+      if (error.response.status === 400) {
+        toast.error(error.response.data, { theme: "colored" });
+      }
     }
   };
 
