@@ -16,7 +16,9 @@ export const registerUser = async (req, res) => {
   // check if user with email already exists
   let userExist = await User.findOne({ email }).exec();
   if (userExist)
-    return res.status(400).send("User with the email already exists");
+    return res
+      .status(400)
+      .send(`User with the email "${email}" already exists`);
 
   // if user does not exist, create new user
   const newUser = new User({
@@ -28,8 +30,7 @@ export const registerUser = async (req, res) => {
 
   try {
     await newUser.save(); // save user to database
-    console.log("New user created: ", newUser);
-    return res.json({ ok: true }); // send response
+    return res.status(200).send("User registered successfully");
   } catch (error) {
     console.log("Create user error: ", error);
     return res.status(400).send("Error creating user, please try again");

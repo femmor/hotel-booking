@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import RegisterForm from "../components/RegisterForm";
 import { register } from "../actions/auth";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  let navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -21,20 +24,15 @@ const Register = () => {
 
     try {
       const res = await register(credentials);
-      console.log("Register user", res); // res.data
-    } catch (error) {
-      console.log(error.message);
+      console.log(res); // res.data
+      toast.success("Registered successfully, please login", {
+        theme: "colored",
+      });
+      navigate("/login");
+    } catch (err) {
+      if (err.response.status === 400)
+        toast.error(err.response.data, { theme: "colored" });
     }
-
-    clearForm();
-  };
-
-  const clearForm = () => {
-    setCredentials({
-      name: "",
-      email: "",
-      password: "",
-    });
   };
 
   return (
@@ -42,6 +40,7 @@ const Register = () => {
       <div className="container-fluid bg-secondary p-5 text-center">
         <h1 className="text-white">Register</h1>
       </div>
+
       <div className="container py-5">
         <div className="row">
           <div className="col-md-6 mx-auto">
