@@ -37,29 +37,23 @@ export const registerUser = async (req, res) => {
   }
 };
 
-export const loginUser = (req, res) => {
+export const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  User.findOne({ email })
-    .then(user => {
-      if (!user)
-        return res.status(400).send("User with the email does not exist");
-      // check if password is correct
-      bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) return res.status(400).send("Error logging in");
-        if (!isMatch) return res.status(400).send("Incorrect password");
 
-        // if user is found and password is correct
-        // create a token with JWT
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-        // return the token to the user
-        return res.json({
-          ok: true,
-          token,
-        });
-      });
-    })
-    .catch(err => {
-      console.log("Login user error: ", err);
-      return res.status(400).send("Error logging in");
+  try {
+    // check if the user exists
+    let user = await User.findOne({ email }).exec();
+    // console.log("user exists", user);
+    if (!user) return res.status(400).send("User with that email not found");
+
+    // check if password is correct
+    user.comparePassword(password, (err, isMatch) => {
+      if (err) return res.status(400).send("Error logging in.");
+      if (!isMatch)
+        return res.status(400).send("Wrong password, please try again!");
     });
+  } catch (error) {
+    console.log("Login error: ", error);
+    return res.status(400).send("Error logging in, please try again");
+  }
 };
