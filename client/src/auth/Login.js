@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { login } from "../actions/auth";
 import LoginForm from "../components/LoginForm";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [credentials, setCredentials] = useState({
     email: "fegomson@gmail.com",
     password: "Test12345",
@@ -19,12 +24,18 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    console.log("send login data", credentials);
     try {
       const res = await login(credentials);
       if (res.data) {
-        console.log("Save user data in redux and local storage and redirect");
-        console.log(res.data);
+        // Save user and token to local storage
+        localStorage.setItem("auth", JSON.stringify(res.data));
+        // Save user and token to redux
+        dispatch({
+          type: "LOGGED_IN_USER",
+          payload: res.data,
+        });
+        // Redirect to home page
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
