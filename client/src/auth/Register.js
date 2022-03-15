@@ -7,9 +7,9 @@ import { toast } from "react-toastify";
 const Register = () => {
   let navigate = useNavigate();
   const [credentials, setCredentials] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: "Emmanuel",
+    email: "fegomson@gmail.com",
+    password: "Test12345",
   });
 
   const handleChange = e => {

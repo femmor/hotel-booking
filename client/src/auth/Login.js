@@ -5,8 +5,8 @@ import LoginForm from "../components/LoginForm";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
+    email: "fegomson@gmail.com",
+    password: "Test12345",
   });
 
   const handleChange = e => {
