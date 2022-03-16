@@ -14,6 +14,7 @@ import ErrorPage from "./booking/ErrorPage";
 import TopNav from "./components/TopNav";
 import Dashboard from "./user/Dashboard";
 import SellerDashboard from "./user/SellerDashboard";
+import NewHotel from "./hotels/NewHotel";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
           path="/dashboard/seller"
           component={SellerDashboard}
         />
+        <PrivateRoute exact path="/hotels/create" component={NewHotel} />
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
