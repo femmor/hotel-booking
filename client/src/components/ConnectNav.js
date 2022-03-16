@@ -7,7 +7,7 @@ const { Meta } = Card;
 
 const ConnectNav = () => {
   const { auth } = useSelector(state => ({ ...state }));
-  const { user } = auth;
+  const { user, token } = auth;
 
   return (
     <div className="d-flex justify-content-around">
@@ -18,6 +18,15 @@ const ConnectNav = () => {
           description={`Joined: ${moment(user.createdAt).fromNow()}`}
         />
       </Card>
+      {auth &&
+        user &&
+        user.stripe_seller &&
+        user.stripe_seller.charges_enabled && (
+          <>
+            <div>Pending Balance</div>
+            <div>Payout Settings</div>
+          </>
+        )}
     </div>
   );
 };
