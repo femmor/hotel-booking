@@ -13,6 +13,7 @@ import Register from "./auth/Register";
 import ErrorPage from "./booking/ErrorPage";
 import TopNav from "./components/TopNav";
 import Dashboard from "./user/Dashboard";
+import SellerDashboard from "./user/SellerDashboard";
 
 const App = () => {
   return (
@@ -29,6 +30,11 @@ const App = () => {
 
       <Switch>
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute
+          exact
+          path="/dashboard/seller"
+          component={SellerDashboard}
+        />
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
