@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { login } from "../actions/auth";
@@ -7,7 +7,7 @@ import LoginForm from "../components/LoginForm";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const [credentials, setCredentials] = useState({
     email: "fegomson@gmail.com",
@@ -34,8 +34,8 @@ const Login = () => {
           type: "LOGGED_IN_USER",
           payload: res.data,
         });
-        // Redirect to home page
-        navigate("/");
+        // Redirect to dashboard on login
+        history.push("/dashboard");
       }
     } catch (error) {
       console.log(error);

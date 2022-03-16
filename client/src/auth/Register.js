@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import RegisterForm from "../components/RegisterForm";
 import { register } from "../actions/auth";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  let navigate = useNavigate();
+  const history = useHistory();
   const [credentials, setCredentials] = useState({
     name: "Emmanuel",
     email: "fegomson@gmail.com",
@@ -28,7 +28,7 @@ const Register = () => {
       toast.success("Registered successfully, please login", {
         theme: "colored",
       });
-      navigate("/login");
+      history.push("/login");
     } catch (err) {
       if (err.response.status === 400)
         toast.error(err.response.data, { theme: "colored" });

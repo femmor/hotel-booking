@@ -12,6 +12,7 @@ const LoginForm = ({ handleSubmit, credentials, handleChange }) => {
           name="email"
           value={email}
           onChange={handleChange}
+          autoComplete="off"
         />
       </div>
       <div className="form-group mb-3">
@@ -23,6 +24,7 @@ const LoginForm = ({ handleSubmit, credentials, handleChange }) => {
           name="password"
           value={password}
           onChange={handleChange}
+          autoComplete="off"
         />
       </div>
       <button

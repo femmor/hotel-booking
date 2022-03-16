@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const TopNav = () => {
   const { auth } = useSelector(state => ({ ...state }));
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const history = useHistory();
 
   // Logout user
   const handleLogout = () => {
@@ -15,7 +15,7 @@ const TopNav = () => {
       payload: null,
     });
     window.localStorage.setItem("auth", null);
-    navigate("/login");
+    history.push("/login");
   };
 
   return (

@@ -1,14 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 
+// Styles
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Components
 import Home from "./booking/Home";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import ErrorPage from "./booking/ErrorPage";
 import TopNav from "./components/TopNav";
-
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Dashboard from "./user/Dashboard";
 
 const App = () => {
   return (
@@ -22,12 +26,13 @@ const App = () => {
         rtl={false}
         pauseOnFocusLoss
       />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/*" element={<ErrorPage />} />
-      </Routes>
+
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
+      </Switch>
     </Router>
   );
 };
