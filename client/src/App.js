@@ -28,10 +28,11 @@ const App = () => {
       />
 
       <Switch>
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
+        <Route path="*" component={ErrorPage} />
       </Switch>
     </Router>
   );
